@@ -2,7 +2,7 @@ import logging
 import random
 import os
 import argparse
-
+from functools import partial
 import telegram
 from environs import Env
 from telegram import Update
@@ -15,6 +15,41 @@ logger = logging.getLogger(__name__)
 
 PLAYING, WIN, ANSWER = range(3)
 
+
+def start(update: Update, context: CallbackContext, bot, chat_id):
+    custom_keyboard = [['Новый вопрос', 'Сдаться'],
+                       ['Мой счет']]
+    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
+    bot.send_message(chat_id=chat_id,
+                     text="ЭТО Викторина",
+                     reply_markup=reply_markup)
+    return WIN
+
+
+def nev_question(update: Update, context: CallbackContext, redis_db, quiz):
+    random_question_answer = random.choice(list(quiz.items()))
+    question = random_question_answer[0]
+    answer = random_question_answer[1]
+    redis_db.set('question', question)
+    redis_db.set('answer', answer)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=question)
+    return ANSWER
+
+
+def answer(update: Update, context: CallbackContext, redis_db):
+    answer = redis_db.get('answer').decode('utf-8')
+    answer_user = update.message.text
+    if answer_user.strip().lower() == answer.strip().lower():
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Поздравляю ваш ответ правильный!!!')
+        return WIN
+    else:
+        context.bot.send_message(chat_id=update.effective_chat.id, text=f'Не правильно! Правильный ответ: {answer}')
+        return PLAYING
+
+
+def surrender(update: Update, context: CallbackContext):
+    context.bot.send_message(chat_id=update.effective_chat.id, text='ОЧЕНЬ ЖАЛЬ!!!')
+    return ConversationHandler.END
 
 def main():
 
@@ -48,49 +83,22 @@ def main():
     updater = Updater(bot_token, use_context=True)
     dp = updater.dispatcher
 
-    def start(update: Update, context: CallbackContext):
-        custom_keyboard = [['Новый вопрос', 'Сдаться'],
-                           ['Мой счет']]
-        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
-        bot.send_message(chat_id=chat_id,
-                         text="ЭТО Викторина",
-                         reply_markup=reply_markup)
-        return WIN
-
-    def nev_question(update: Update, context: CallbackContext):
-        random_question_answer = random.choice(list(quiz.items()))
-        question = random_question_answer[0]
-        answer = random_question_answer[1]
-        redis_db.set('question', question)
-        redis_db.set('answer', answer)
-        context.bot.send_message(chat_id=update.effective_chat.id, text=question)
-        return ANSWER
-
-    def answer(update: Update, context: CallbackContext):
-        answer = redis_db.get('answer').decode('utf-8')
-        answer_user = update.message.text
-        if answer_user.strip().lower() == answer.strip().lower():
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Поздравляю ваш ответ правильный!!!')
-            return WIN
-        else:
-            context.bot.send_message(chat_id=update.effective_chat.id, text=f'Не правильно! Правильный ответ: {answer}')
-            return PLAYING
-
-    def surrender(update: Update, context: CallbackContext):
-        context.bot.send_message(chat_id=update.effective_chat.id, text='ОЧЕНЬ ЖАЛЬ!!!')
-        return ConversationHandler.END
+    partial_start = partial(start, bot=bot, chat_id=chat_id)
+    partial_nev_question = partial(nev_question, redis_db=redis_db, quiz=quiz)
+    partial_answer = partial(answer, redis_db=redis_db)
+    partial_surrender = partial(surrender,)
 
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('start', start)],
-        states={PLAYING: [RegexHandler('^Новый вопрос$', nev_question),
-                          RegexHandler('^Сдаться$', surrender),
+        entry_points=[CommandHandler('start', partial_start)],
+        states={PLAYING: [RegexHandler('^Новый вопрос$', partial_nev_question),
+                          RegexHandler('^Сдаться$', partial_surrender),
                           MessageHandler(Filters.text, nev_question)],
-                ANSWER: [MessageHandler(Filters.text & (~Filters.command), answer),
-                         RegexHandler('^Сдаться$', surrender)],
-                WIN: [RegexHandler('^Новый вопрос$', nev_question),
-                      RegexHandler('^Сдаться$', surrender)]
+                ANSWER: [MessageHandler(Filters.text & (~Filters.command), partial_answer),
+                         RegexHandler('^Сдаться$', partial_surrender)],
+                WIN: [RegexHandler('^Новый вопрос$', partial_nev_question),
+                      RegexHandler('^Сдаться$', partial_surrender)]
                 },
-        fallbacks=[CommandHandler('surrender', surrender)])
+        fallbacks=[CommandHandler('surrender', partial_surrender)])
 
     dp.add_handler(conv_handler)
 

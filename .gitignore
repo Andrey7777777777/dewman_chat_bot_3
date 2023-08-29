@@ -1,5 +1,7 @@
 .gitattributes
 .env
+.DS_Store
+logs.lod
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -12,7 +12,6 @@ from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
 from text_tools import get_questions_answers
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 
@@ -39,6 +38,12 @@ def nev_question(vk_api, event, redis_db, keyboard, quiz):
 
 
 def main():
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s; %(levelname)s; %(name)s; %(message)s',
+        filename='logs.lod',
+        filemode='w',
+    )
     default_file_path = (os.path.join(os.getcwd(), 'quiz-questions'))
 
     parser = argparse.ArgumentParser(description='Запуск скрипта')

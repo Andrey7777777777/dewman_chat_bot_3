@@ -1,0 +1,138 @@
+2023-08-29 15:44:12,429; DEBUG; telegram.ext.dispatcher; Setting singleton dispatcher as <telegram.ext.dispatcher.Dispatcher object at 0x1069619c0>
+2023-08-29 15:44:12,429; DEBUG; telegram.bot; Entering: send_message
+2023-08-29 15:44:12,429; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; Starting new HTTPS connection (1): api.telegram.org
+2023-08-29 15:44:12,716; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/sendMessage HTTP/1.1" 200 356
+2023-08-29 15:44:12,717; DEBUG; telegram.bot; {'message_id': 420, 'date': 1693313052, 'chat': {'id': 943843488, 'type': 'private', 'username': 'Andrey_Korvel', 'first_name': 'Andrey', 'last_name': 'Korvel'}, 'text': 'ЭТО Викторина', 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 6401904383, 'first_name': 'Viktorina_devman', 'is_bot': True, 'username': 'Viktorina_devman_bot'}}
+2023-08-29 15:44:12,717; DEBUG; telegram.bot; Exiting: send_message
+2023-08-29 15:44:12,718; INFO; apscheduler.scheduler; Scheduler started
+2023-08-29 15:44:12,718; DEBUG; apscheduler.scheduler; Looking for jobs to run
+2023-08-29 15:44:12,718; DEBUG; apscheduler.scheduler; No jobs; waiting until a job is added
+2023-08-29 15:44:12,718; DEBUG; telegram.bot; Entering: get_me
+2023-08-29 15:44:12,718; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; Starting new HTTPS connection (1): api.telegram.org
+2023-08-29 15:44:12,952; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getMe HTTP/1.1" 200 209
+2023-08-29 15:44:12,952; DEBUG; telegram.bot; {'id': 6401904383, 'first_name': 'Viktorina_devman', 'is_bot': True, 'username': 'Viktorina_devman_bot', 'can_join_groups': True, 'can_read_all_group_messages': False, 'supports_inline_queries': False}
+2023-08-29 15:44:12,952; DEBUG; telegram.bot; Exiting: get_me
+2023-08-29 15:44:12,952; DEBUG; telegram.bot; Entering: get_my_commands
+2023-08-29 15:44:13,032; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getMyCommands HTTP/1.1" 200 23
+2023-08-29 15:44:13,032; DEBUG; telegram.bot; []
+2023-08-29 15:44:13,032; DEBUG; telegram.bot; Exiting: get_my_commands
+2023-08-29 15:44:13,033; DEBUG; telegram.ext.updater; Bot:6401904383:dispatcher - started
+2023-08-29 15:44:13,033; DEBUG; telegram.ext.updater; Bot:6401904383:updater - started
+2023-08-29 15:44:13,033; DEBUG; telegram.ext.updater; Waiting for Dispatcher and polling to start
+2023-08-29 15:44:13,033; DEBUG; telegram.ext.updater; Updater thread started (polling)
+2023-08-29 15:44:13,034; DEBUG; telegram.ext.updater; Start network loop retry bootstrap del webhook
+2023-08-29 15:44:13,034; DEBUG; telegram.ext.dispatcher; Dispatcher started
+2023-08-29 15:44:13,034; DEBUG; telegram.bot; Entering: delete_webhook
+2023-08-29 15:44:13,141; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/deleteWebhook HTTP/1.1" 200 68
+2023-08-29 15:44:13,142; DEBUG; telegram.bot; True
+2023-08-29 15:44:13,142; DEBUG; telegram.bot; Exiting: delete_webhook
+2023-08-29 15:44:13,142; DEBUG; telegram.ext.updater; Bootstrap done
+2023-08-29 15:44:13,142; DEBUG; telegram.ext.updater; Start network loop retry getting Updates
+2023-08-29 15:44:13,143; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:44:23,234; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:44:23,235; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:44:23,235; DEBUG; telegram.bot; []
+2023-08-29 15:44:23,235; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:44:23,235; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:44:33,370; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:44:33,372; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:44:33,373; DEBUG; telegram.bot; []
+2023-08-29 15:44:33,373; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:44:33,373; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:44:34,084; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 409
+2023-08-29 15:44:34,085; DEBUG; telegram.bot; Getting updates: [265262410]
+2023-08-29 15:44:34,085; DEBUG; telegram.bot; [<telegram.update.Update object at 0x106980820>]
+2023-08-29 15:44:34,085; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:44:34,085; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:44:34,085; DEBUG; telegram.ext.dispatcher; Processing Update: {'update_id': 265262410, 'message': {'message_id': 421, 'date': 1693313074, 'chat': {'id': 943843488, 'type': 'private', 'username': 'Andrey_Korvel', 'first_name': 'Andrey', 'last_name': 'Korvel'}, 'text': '/start', 'entities': [{'type': 'bot_command', 'offset': 0, 'length': 6}], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 'from': {'id': 943843488, 'first_name': 'Andrey', 'is_bot': False, 'last_name': 'Korvel', 'username': 'Andrey_Korvel', 'language_code': 'ru'}}}
+2023-08-29 15:44:34,086; DEBUG; telegram.ext.conversationhandler; selecting conversation (943843488, 943843488) with state None
+2023-08-29 15:44:34,086; ERROR; telegram.ext.dispatcher; No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/korvel/PycharmProjects/dewman_chat_bot_3/Virtualsreda/lib/python3.10/site-packages/telegram/ext/dispatcher.py", line 425, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/korvel/PycharmProjects/dewman_chat_bot_3/Virtualsreda/lib/python3.10/site-packages/telegram/ext/conversationhandler.py", line 487, in handle_update
+    new_state = handler.handle_update(update, dispatcher, check_result, context)
+  File "/Users/korvel/PycharmProjects/dewman_chat_bot_3/Virtualsreda/lib/python3.10/site-packages/telegram/ext/handler.py", line 145, in handle_update
+    return self.callback(update, context)
+  File "/Users/korvel/PycharmProjects/dewman_chat_bot_3/tg_bot.py", line 23, in start
+    bot.send_message(chat_id=chat_id,
+AttributeError: 'CallbackContext' object has no attribute 'send_message'
+2023-08-29 15:44:44,158; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:44:44,159; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:44:44,159; DEBUG; telegram.bot; []
+2023-08-29 15:44:44,159; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:44:44,159; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:44:54,242; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:44:54,243; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:44:54,243; DEBUG; telegram.bot; []
+2023-08-29 15:44:54,243; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:44:54,243; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:45:04,388; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:45:04,389; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:45:04,389; DEBUG; telegram.bot; []
+2023-08-29 15:45:04,390; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:45:04,390; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:45:14,469; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:45:14,471; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:45:14,471; DEBUG; telegram.bot; []
+2023-08-29 15:45:14,471; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:45:14,472; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:45:24,657; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:45:24,658; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:45:24,658; DEBUG; telegram.bot; []
+2023-08-29 15:45:24,658; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:45:24,658; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:45:34,792; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:45:34,793; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:45:34,793; DEBUG; telegram.bot; []
+2023-08-29 15:45:34,793; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:45:34,793; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:45:44,928; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:45:44,929; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:45:44,930; DEBUG; telegram.bot; []
+2023-08-29 15:45:44,930; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:45:44,930; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:45:55,066; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:45:55,067; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:45:55,068; DEBUG; telegram.bot; []
+2023-08-29 15:45:55,068; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:45:55,068; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:46:05,202; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:46:05,203; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:46:05,203; DEBUG; telegram.bot; []
+2023-08-29 15:46:05,203; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:46:05,203; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:46:15,272; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:46:15,274; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:46:15,274; DEBUG; telegram.bot; []
+2023-08-29 15:46:15,274; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:46:15,274; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:46:25,375; DEBUG; telegram.vendor.ptb_urllib3.urllib3.connectionpool; https://api.telegram.org:443 "POST /bot6401904383:AAHmfcwzOZt8U4tQv3TnsGLrn_9LBiEyee0/getUpdates HTTP/1.1" 200 23
+2023-08-29 15:46:25,376; DEBUG; telegram.bot; No new updates found.
+2023-08-29 15:46:25,376; DEBUG; telegram.bot; []
+2023-08-29 15:46:25,376; DEBUG; telegram.bot; Exiting: get_updates
+2023-08-29 15:46:25,376; DEBUG; telegram.bot; Entering: get_updates
+2023-08-29 15:46:29,913; INFO; telegram.ext.updater; Received signal 2 (SIGINT), stopping...
+2023-08-29 15:46:29,914; INFO; apscheduler.scheduler; Scheduler has been shut down
+2023-08-29 15:46:29,914; DEBUG; apscheduler.scheduler; Looking for jobs to run
+2023-08-29 15:46:29,915; DEBUG; apscheduler.scheduler; No jobs; waiting until a job is added
+2023-08-29 15:46:29,915; DEBUG; telegram.ext.updater; Stopping Updater and Dispatcher...
+2023-08-29 15:46:29,915; DEBUG; telegram.ext.updater; Requesting Dispatcher to stop...
+2023-08-29 15:46:30,447; DEBUG; telegram.ext.dispatcher; orderly stopping
+2023-08-29 15:46:30,448; DEBUG; telegram.ext.dispatcher; Dispatcher thread stopped
+2023-08-29 15:46:30,448; DEBUG; telegram.ext.updater; Bot:6401904383:dispatcher - ended
+2023-08-29 15:46:30,539; DEBUG; telegram.ext.dispatcher; Waiting for async thread 1/4 to end
+2023-08-29 15:46:30,539; DEBUG; telegram.ext.dispatcher; Closing run_async thread Bot:6401904383:worker:cff9a013-a53d-4b32-9336-96212a7e6ae2_0/4
+2023-08-29 15:46:30,539; DEBUG; telegram.ext.dispatcher; Closing run_async thread Bot:6401904383:worker:cff9a013-a53d-4b32-9336-96212a7e6ae2_1/4
+2023-08-29 15:46:30,539; DEBUG; telegram.ext.dispatcher; Closing run_async thread Bot:6401904383:worker:cff9a013-a53d-4b32-9336-96212a7e6ae2_2/4
+2023-08-29 15:46:30,540; DEBUG; telegram.ext.dispatcher; Closing run_async thread Bot:6401904383:worker:cff9a013-a53d-4b32-9336-96212a7e6ae2_3/4
+2023-08-29 15:46:30,541; DEBUG; telegram.ext.dispatcher; async thread 1/4 has ended
+2023-08-29 15:46:30,541; DEBUG; telegram.ext.dispatcher; Waiting for async thread 2/4 to end
+2023-08-29 15:46:30,541; DEBUG; telegram.ext.dispatcher; async thread 2/4 has ended
+2023-08-29 15:46:30,541; DEBUG; telegram.ext.dispatcher; Waiting for async thread 3/4 to end
+2023-08-29 15:46:30,541; DEBUG; telegram.ext.dispatcher; async thread 3/4 has ended
+2023-08-29 15:46:30,541; DEBUG; telegram.ext.dispatcher; Waiting for async thread 4/4 to end
+2023-08-29 15:46:30,541; DEBUG; telegram.ext.dispatcher; async thread 4/4 has ended
+2023-08-29 15:46:30,541; DEBUG; telegram.ext.updater; Waiting for Bot:6401904383:dispatcher thread to end
+2023-08-29 15:46:30,541; DEBUG; telegram.ext.updater; Bot:6401904383:dispatcher thread has ended
+2023-08-29 15:46:30,542; DEBUG; telegram.ext.updater; Waiting for Bot:6401904383:updater thread to end

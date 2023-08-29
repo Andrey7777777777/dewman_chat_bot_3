@@ -11,17 +11,19 @@ import redis
 
 from text_tools import get_questions_answers
 
-
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
-)
-
 logger = logging.getLogger(__name__)
 
 PLAYING, WIN, ANSWER = range(3)
 
 
 def main():
+
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s; %(levelname)s; %(name)s; %(message)s',
+        filename='logs.lod',
+        filemode='w',
+    )
     default_file_path = (os.path.join(os.getcwd(), 'quiz-questions'))
 
     parser = argparse.ArgumentParser(description='Запуск скрипта')

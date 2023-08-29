@@ -28,8 +28,7 @@ def start(update: Update, context: CallbackContext, bot, chat_id):
 
 def nev_question(update: Update, context: CallbackContext, redis_db, quiz):
     random_question_answer = random.choice(list(quiz.items()))
-    question = random_question_answer[0]
-    answer = random_question_answer[1]
+    question, answer = random_question_answer
     redis_db.set('question', question)
     redis_db.set('answer', answer)
     context.bot.send_message(chat_id=update.effective_chat.id, text=question)

@@ -1,5 +1,7 @@
 import logging
 import random
+import os
+import argparse
 
 from environs import Env
 
@@ -37,7 +39,18 @@ def nev_question(vk_api, event, redis_db, keyboard, quiz):
 
 
 def main():
-    quiz = get_questions_answers()
+    default_file_path = (os.path.join(os.getcwd(), 'quiz-questions'))
+
+    parser = argparse.ArgumentParser(description='Запуск скрипта')
+    parser.add_argument(
+        '-fp',
+        '--file_path',
+        help='Укажите путь к файлу',
+        nargs='?', default=default_file_path, type=str
+    )
+    args = parser.parse_args()
+    file_path = args.file_path
+    quiz = get_questions_answers(filepath=file_path)
     env = Env()
     env.read_env()
     bot_vk_token = env.str('VK_TOKEN')

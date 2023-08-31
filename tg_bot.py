@@ -51,14 +51,18 @@ def surrender(update: Update, context: CallbackContext):
     return ConversationHandler.END
 
 def main():
-
     logging.basicConfig(
         level=logging.DEBUG,
         format='%(asctime)s; %(levelname)s; %(name)s; %(message)s',
         filename='logs.lod',
         filemode='w',
     )
-    default_file_path = (os.path.join(os.getcwd(), 'quiz-questions'))
+    env = Env()
+    env.read_env()
+    if env.str('FILE_PATH'):
+        default_file_path = env.str('FILE_PATH')
+    else:
+        default_file_path = (os.path.join(os.getcwd(), 'quiz-questions'))
 
     parser = argparse.ArgumentParser(description='Запуск скрипта')
     parser.add_argument(
@@ -70,8 +74,6 @@ def main():
     args = parser.parse_args()
     file_path = args.file_path
     quiz = get_questions_answers(filepath=file_path)
-    env = Env()
-    env.read_env()
     bot_token = env.str('TG_TOKEN')
     chat_id = env.str('TG_CHAT_ID')
     host = env.str('REDIS_HOST')

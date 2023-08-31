@@ -43,7 +43,12 @@ def main():
         filename='logs.lod',
         filemode='w',
     )
-    default_file_path = (os.path.join(os.getcwd(), 'quiz-questions'))
+    env = Env()
+    env.read_env()
+    if env.str('FILE_PATH'):
+        default_file_path = env.str('FILE_PATH')
+    else:
+        default_file_path = (os.path.join(os.getcwd(), 'quiz-questions'))
 
     parser = argparse.ArgumentParser(description='Запуск скрипта')
     parser.add_argument(
@@ -55,8 +60,6 @@ def main():
     args = parser.parse_args()
     file_path = args.file_path
     quiz = get_questions_answers(filepath=file_path)
-    env = Env()
-    env.read_env()
     bot_vk_token = env.str('VK_TOKEN')
     host = env.str('REDIS_HOST')
     port = env.int('REDIS_PORT')

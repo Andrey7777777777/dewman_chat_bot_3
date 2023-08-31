@@ -16,17 +16,17 @@ logger = logging.getLogger(__name__)
 PLAYING, WIN, ANSWER = range(3)
 
 
-def start(update: Update, context: CallbackContext, bot, chat_id):
+def start(update: Update, context: CallbackContext):
     custom_keyboard = [['Новый вопрос', 'Сдаться'],
                        ['Мой счет']]
     reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
-    bot.send_message(chat_id=chat_id,
+    context.bot.send_message(chat_id=update.effective_chat.id,
                      text="ЭТО Викторина",
                      reply_markup=reply_markup)
     return WIN
 
 
-def nev_question(update: Update, context: CallbackContext, redis_db, quiz):
+def get_new_question(update: Update, context: CallbackContext, redis_db, quiz):
     random_question_answer = random.choice(list(quiz.items()))
     question, answer = random_question_answer
     redis_db.set('question', question)
@@ -78,26 +78,24 @@ def main():
     port = env.int('REDIS_PORT')
     redis_password = env.str('REDIS_PASSWORD')
     redis_db = redis.Redis(host=host, port=port, password=redis_password)
-    bot = telegram.Bot(token=bot_token)
     updater = Updater(bot_token, use_context=True)
     dp = updater.dispatcher
 
-    partial_start = partial(start, bot=bot, chat_id=chat_id)
-    partial_nev_question = partial(nev_question, redis_db=redis_db, quiz=quiz)
+    partial_get_new_question = partial(get_new_question, redis_db=redis_db, quiz=quiz)
     partial_answer = partial(answer, redis_db=redis_db)
-    partial_surrender = partial(surrender,)
+
 
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('start', partial_start)],
-        states={PLAYING: [RegexHandler('^Новый вопрос$', partial_nev_question),
-                          RegexHandler('^Сдаться$', partial_surrender),
-                          MessageHandler(Filters.text, nev_question)],
+        entry_points=[CommandHandler('start', start)],
+        states={PLAYING: [RegexHandler('^Новый вопрос$', partial_get_new_question),
+                          RegexHandler('^Сдаться$', surrender),
+                          MessageHandler(Filters.text, get_new_question)],
                 ANSWER: [MessageHandler(Filters.text & (~Filters.command), partial_answer),
-                         RegexHandler('^Сдаться$', partial_surrender)],
-                WIN: [RegexHandler('^Новый вопрос$', partial_nev_question),
-                      RegexHandler('^Сдаться$', partial_surrender)]
+                         RegexHandler('^Сдаться$', surrender)],
+                WIN: [RegexHandler('^Новый вопрос$', partial_get_new_question),
+                      RegexHandler('^Сдаться$', surrender)]
                 },
-        fallbacks=[CommandHandler('surrender', partial_surrender)])
+        fallbacks=[CommandHandler('surrender', surrender)])
 
     dp.add_handler(conv_handler)
 

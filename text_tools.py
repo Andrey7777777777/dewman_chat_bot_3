@@ -6,7 +6,7 @@ def get_questions_answers(filepath):
     questions = []
     answers = []
     for file in files:
-        with open(os.path.join(os.getcwd(), 'quiz-questions', file), encoding="KOI8-R") as file:
+        with open(os.path.join(filepath, file), 'r', encoding="KOI8-R") as file:
             file_content = file.read()
         blocks = file_content.split('\n\n')
         for block in blocks:

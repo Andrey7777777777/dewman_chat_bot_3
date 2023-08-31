@@ -100,7 +100,6 @@ def main():
                                 random_id=random.randint(1, 1000))
         except Exception as error:
             logger.exception(f'Бот упал с ошибкой: {error}')
-            continue
 
 
 if __name__ == '__main__':

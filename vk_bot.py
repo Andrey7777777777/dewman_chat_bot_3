@@ -26,10 +26,9 @@ def start(event, vk_api, keyboard):
 
 def nev_question(vk_api, event, redis_db, keyboard, quiz):
     random_question_answer = random.choice(list(quiz.items()))
-    question = random_question_answer[0]
-    answer = random_question_answer[1]
-    redis_db.set('question', question)
-    redis_db.set('answer', answer)
+    question, answer = random_question_answer
+    redis_db.set(f'vk_question{event.user_id}', question)
+    redis_db.set(f'vk_answer{event.user_id}', answer)
     vk_api.messages.send(
         user_id=event.user_id,
         message=question,
@@ -79,7 +78,7 @@ def main():
                     elif event.text == "Новый вопрос":
                         nev_question(vk_api, event, redis_db, keyboard, quiz)
                     elif event.text == "Сдаться":
-                        answer = redis_db.get('answer').decode('utf-8')
+                        answer = redis_db.get(f'vk_answer{event.user_id}').decode('utf-8')
                         vk_api.messages.send(
                             user_id=event.user_id,
                             message=f'Правильный ответ: {answer}',

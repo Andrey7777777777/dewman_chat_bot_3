@@ -21,22 +21,22 @@ def start(update: Update, context: CallbackContext):
                        ['Мой счет']]
     reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
     context.bot.send_message(chat_id=update.effective_chat.id,
-                     text="ЭТО Викторина",
-                     reply_markup=reply_markup)
+                             text="ЭТО Викторина",
+                             reply_markup=reply_markup)
     return WIN
 
 
-def get_new_question(update: Update, context: CallbackContext, redis_db, quiz):
+def get_new_question(update: Update, context: CallbackContext, redis_db, quiz, chat_id):
     random_question_answer = random.choice(list(quiz.items()))
     question, answer = random_question_answer
-    redis_db.set('question', question)
-    redis_db.set('answer', answer)
+    redis_db.set(f'tg_question {chat_id}', question)
+    redis_db.set(f'tg_answer {chat_id}', answer)
     context.bot.send_message(chat_id=update.effective_chat.id, text=question)
     return ANSWER
 
 
-def answer(update: Update, context: CallbackContext, redis_db):
-    answer = redis_db.get('answer').decode('utf-8')
+def answer(update: Update, context: CallbackContext, redis_db, chat_id):
+    answer = redis_db.get(f'tg_answer {chat_id}').decode('utf-8')
     answer_user = update.message.text
     if answer_user.strip().lower() == answer.strip().lower():
         context.bot.send_message(chat_id=update.effective_chat.id, text='Поздравляю ваш ответ правильный!!!')
@@ -81,8 +81,8 @@ def main():
     updater = Updater(bot_token, use_context=True)
     dp = updater.dispatcher
 
-    partial_get_new_question = partial(get_new_question, redis_db=redis_db, quiz=quiz)
-    partial_answer = partial(answer, redis_db=redis_db)
+    partial_get_new_question = partial(get_new_question, redis_db=redis_db, quiz=quiz, chat_id=chat_id)
+    partial_answer = partial(answer, redis_db=redis_db, chat_id=chat_id)
 
 
     conv_handler = ConversationHandler(

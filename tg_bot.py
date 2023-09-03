@@ -26,23 +26,25 @@ def start(update: Update, context: CallbackContext):
     return WIN
 
 
-def get_new_question(update: Update, context: CallbackContext, redis_db, quiz, chat_id):
+def get_new_question(update: Update, context: CallbackContext, redis_db, quiz):
     random_question_answer = random.choice(list(quiz.items()))
     question, answer = random_question_answer
+    chat_id = update.effective_chat.id
     redis_db.set(f'tg_question {chat_id}', question)
     redis_db.set(f'tg_answer {chat_id}', answer)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=question)
+    context.bot.send_message(chat_id=chat_id, text=question)
     return ANSWER
 
 
-def answer(update: Update, context: CallbackContext, redis_db, chat_id):
+def answer(update: Update, context: CallbackContext, redis_db):
+    chat_id = update.effective_chat.id
     answer = redis_db.get(f'tg_answer {chat_id}').decode('utf-8')
     answer_user = update.message.text
     if answer_user.strip().lower() == answer.strip().lower():
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Поздравляю ваш ответ правильный!!!')
+        context.bot.send_message(chat_id=chat_id, text='Поздравляю ваш ответ правильный!!!')
         return WIN
     else:
-        context.bot.send_message(chat_id=update.effective_chat.id, text=f'Не правильно! Правильный ответ: {answer}')
+        context.bot.send_message(chat_id=chat_id, text=f'Не правильно! Правильный ответ: {answer}')
         return PLAYING
 
 
@@ -75,7 +77,6 @@ def main():
     file_path = args.file_path
     quiz = get_questions_answers(filepath=file_path)
     bot_token = env.str('TG_TOKEN')
-    chat_id = env.str('TG_CHAT_ID')
     host = env.str('REDIS_HOST')
     port = env.int('REDIS_PORT')
     redis_password = env.str('REDIS_PASSWORD')
@@ -83,9 +84,8 @@ def main():
     updater = Updater(bot_token, use_context=True)
     dp = updater.dispatcher
 
-    partial_get_new_question = partial(get_new_question, redis_db=redis_db, quiz=quiz, chat_id=chat_id)
-    partial_answer = partial(answer, redis_db=redis_db, chat_id=chat_id)
-
+    partial_get_new_question = partial(get_new_question, redis_db=redis_db, quiz=quiz)
+    partial_answer = partial(answer, redis_db=redis_db)
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
